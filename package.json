@@ -7,11 +7,16 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "storybook": "storybook dev -p 6006 --no-open",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.29.0",
     "@emotion/react": "^11.14.0",
+    "@lexical/react": "^0.38.2",
+    "lexical": "^0.38.2",
+    "lucide-react": "^0.553.0",
     "next": "16.0.3",
     "next-themes": "^0.4.6",
     "react": "19.2.0",
@@ -20,10 +25,15 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
+    "@storybook/addon-docs": "^10.0.7",
+    "@storybook/addon-themes": "^10.0.8",
+    "@storybook/nextjs": "10.0.7",
+    "@storybook/theming": "^8.6.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "storybook": "10.0.7",
     "typescript": "^5"
   }
 }
