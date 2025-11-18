@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "TabNote",
+  "version": "1.0.0",
+  "description": "Replace your new tab with a sleek and performative note-taking app.",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*.woff2", "assets/*.woff", "assets/*.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
