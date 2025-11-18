@@ -3,7 +3,6 @@
 import { db } from "@/lib/repositories/db";
 import {
   Box,
-  Button,
   Container,
   Flex,
   For,
@@ -27,7 +26,7 @@ export default function TabView() {
 
   useEffect(() => {
     if (tabs.value === null && notes?.length) {
-      tabs.setValue(notes[0].tableName);
+      tabs.setValue(notes[0].databaseName);
     }
   }, [notes, tabs, tabs.value]);
 
@@ -36,7 +35,7 @@ export default function TabView() {
       <Flex w="2xs" h="full" spaceY="2" direction="column">
         <Box bg="bg.muted" rounded="md">
           <Flex align="center" justify="space-between">
-            <Text fontSize="lg" fontWeight="bold" p={4}>
+            <Text fontSize="lg" fontWeight="bold" p={4} color="colorPalette.fg">
               TabNote
             </Text>
 
@@ -49,14 +48,17 @@ export default function TabView() {
             {(note) => (
               <Tabs.Trigger
                 key={note.id}
-                value={note.tableName}
+                value={note.databaseName}
                 justifyContent="normal"
                 textAlign="left"
                 pr="1"
               >
                 <Text flex="1">{note.displayName}</Text>
 
-                <TabMenu note={note} hidden={note.tableName !== tabs.value} />
+                <TabMenu
+                  note={note}
+                  hidden={note.databaseName !== tabs.value}
+                />
               </Tabs.Trigger>
             )}
           </For>
@@ -68,14 +70,14 @@ export default function TabView() {
         {(note) => (
           <Tabs.Content
             key={note.id}
-            value={note.tableName}
+            value={note.databaseName}
             flex="1"
             overflow="auto"
           >
             <Container maxW="breakpoint-md" height="full" padding={4}>
               <TiptapEditor
                 extensions={[
-                  IndexedDbSync.configure({ noteName: note.tableName }),
+                  IndexedDbSync.configure({ noteName: note.databaseName }),
                 ]}
                 style={{ height: "100%" }}
               />

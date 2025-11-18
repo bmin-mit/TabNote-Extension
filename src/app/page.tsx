@@ -3,7 +3,7 @@ import TabView from "@/components/tab-view/TabView";
 
 export default function Home() {
   return (
-    <Container maxW="full" height="vh" padding="2">
+    <Container maxW="full" height="vh" padding="2" colorPalette="teal">
       <TabView />
     </Container>
   );

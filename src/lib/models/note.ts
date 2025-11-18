@@ -1,7 +1,7 @@
 export interface Note {
   id: number;
   displayName: string;
-  tableName: string;
+  databaseName: string;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -13,7 +13,7 @@ export default function CreateNoteDialog() {
 
     db.notes.add({
       displayName: noteName,
-      tableName: "",
+      databaseName: "",
       createdAt: new Date(),
       updatedAt: new Date(),
     });

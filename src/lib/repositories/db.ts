@@ -8,7 +8,7 @@ export const db = new Dexie("TabNote") as Dexie & {
 };
 
 db.version(1).stores({
-  notes: "++id, displayName, &tableName, createdAt, updatedAt",
+  notes: "++id, displayName, &databaseName, createdAt, updatedAt",
 });
 
 db.on("populate", (transaction) => {
@@ -21,8 +21,8 @@ db.on("populate", (transaction) => {
 });
 
 db.notes.hook("creating", (_, obj) => {
-  if (!obj.tableName) {
-    obj.tableName = uuidv4();
+  if (!obj.databaseName) {
+    obj.databaseName = uuidv4();
   }
 });
 
