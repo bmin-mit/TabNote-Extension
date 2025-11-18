@@ -3,6 +3,9 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 import type { Preview } from "@storybook/nextjs";
 import { themes } from "storybook/theming";
 
+import "fake-indexeddb/auto";
+import "../src/app/globals.css";
+
 const preview: Preview = {
   tags: ["autodocs"],
   parameters: {

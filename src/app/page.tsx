@@ -1,6 +1,10 @@
-import { Box } from "@chakra-ui/react";
-import { MarkdownEditor } from "@/components/ui/markdown";
+import { Container } from "@chakra-ui/react";
+import TabView from "@/components/tab-view/TabView";
 
 export default function Home() {
-  return <Box />;
+  return (
+    <Container maxW="full" height="vh" padding="2">
+      <TabView />
+    </Container>
+  );
 }

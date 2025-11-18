@@ -1,11 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/nextjs";
-import { RichTextEditor } from ".";
+import { TiptapEditor } from ".";
 
-//👇 This default export determines where your story goes in the story list
 const meta = {
-  title: "Components/UI/RichTextEditor",
-  component: RichTextEditor,
+  title: "Components/UI/TiptapEditor",
+  component: TiptapEditor,
   parameters: {
     layout: "fullscreen",
   },
@@ -16,7 +15,7 @@ const meta = {
       </Box>
     ),
   ],
-} satisfies Meta<typeof RichTextEditor>;
+} satisfies Meta<typeof TiptapEditor>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
