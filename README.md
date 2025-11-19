@@ -18,9 +18,10 @@ I am working on publishing the extension to the Chrome Web Store and Firefox Add
 Alternatively, you can build the extension from source by following the instructions below.
 
 Load the extension in your browser:
+   - Extract the release zip package.
    - Open your browser's extensions page (e.g., `chrome://extensions/` for Chrome).
    - Enable "Developer mode".
-   - Click "Load unpacked" and select the `dist` folder from the cloned repository.
+   - Click "Load unpacked" and select the extracted folder.
 
 ## Build your own
 To build TabNote from source, follow these steps:
