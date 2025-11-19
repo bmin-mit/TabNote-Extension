@@ -1,8 +1,8 @@
 .tiptap[contenteditable] {
-	outline: none;
+  outline: none;
 }
 
 .tiptap {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
 }

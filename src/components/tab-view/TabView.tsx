@@ -13,8 +13,7 @@ import {
 import { useLiveQuery } from "dexie-react-hooks";
 import { useEffect } from "react";
 import { CreateNoteDialog } from "../note-action-dialog";
-import { TiptapEditor } from "../tiptap";
-import { IndexedDbSync } from "../tiptap/extensions";
+import { RichTextEditor } from "../rich-text";
 import TabMenu from "./TabMenu";
 
 export default function TabView() {
@@ -74,14 +73,14 @@ export default function TabView() {
             flex="1"
             overflow="auto"
           >
-            <Container maxW="breakpoint-md" height="full" padding={4}>
-              <TiptapEditor
-                extensions={[
-                  IndexedDbSync.configure({ noteName: note.databaseName }),
-                ]}
-                style={{ height: "100%" }}
-              />
-            </Container>
+            <Flex direction="column" height="full">
+              <Container maxW="breakpoint-md" flex="1" padding="4">
+                <RichTextEditor
+                  dbName={note.databaseName}
+                  style={{ height: "100%" }}
+                />
+              </Container>
+            </Flex>
           </Tabs.Content>
         )}
       </For>

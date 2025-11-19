@@ -13,12 +13,14 @@ import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
 import "@fontsource/inter/800.css";
 import "@fontsource/inter/900.css";
+import { Toaster } from "@/components/ui/toaster.tsx";
 
 // biome-ignore lint/style/noNonNullAssertion: Ignore for simplicity
 createRoot(document.getElementById("root")!).render(
-	<StrictMode>
-		<Provider>
-			<App />
-		</Provider>
-	</StrictMode>,
+  <StrictMode>
+    <Provider>
+      <App />
+      <Toaster />
+    </Provider>
+  </StrictMode>,
 );
