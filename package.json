@@ -1,7 +1,7 @@
 {
   "name": "react-base",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -19,7 +19,6 @@
     "@chakra-ui/react": "^3.29.0",
     "@emotion/react": "^11.14.0",
     "@fontsource/inter": "^5.2.8",
-    "@lexical/react": "^0.38.2",
     "@mantine/core": "^8.3.8",
     "@mantine/hooks": "^8.3.8",
     "@mantine/utils": "^6.0.22",
