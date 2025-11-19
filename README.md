@@ -11,6 +11,17 @@ This project is currently under development. Features and functionalities may ch
 - [ ] Note Organization
 - [ ] Export/Import
 
+## Installation
+
+You can visit the [Releases](https://github.com/bmin-mit/TabNote-Extension/releases) page to download the latest version of TabNote.
+I am working on publishing the extension to the Chrome Web Store and Firefox Add-ons soon.
+Alternatively, you can build the extension from source by following the instructions below.
+
+Load the extension in your browser:
+   - Open your browser's extensions page (e.g., `chrome://extensions/` for Chrome).
+   - Enable "Developer mode".
+   - Click "Load unpacked" and select the `dist` folder from the cloned repository.
+
 ## Build your own
 To build TabNote from source, follow these steps:
 
@@ -29,7 +40,4 @@ bun i
 bun run build
 ```
 
-4. Load the extension in your browser:
-   - Open your browser's extensions page (e.g., `chrome://extensions/` for Chrome).
-   - Enable "Developer mode".
-   - Click "Load unpacked" and select the `dist` folder from the cloned repository.
+4. Follow the instructions above to load the extension in your browser.
