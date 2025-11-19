@@ -6,7 +6,7 @@ TabNote is a simple and intuitive note-taking application designed to help users
 This project is currently under development. Features and functionalities may change as we continue to improve the application. Stay tuned for updates!
 
 - [x] Note Editing
-- [ ] Note Toolbar
+- [x] Note Toolbar
 - [ ] Themes
 - [ ] Note Organization
 - [ ] Export/Import
