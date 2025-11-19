@@ -1,5 +1,3 @@
-"use client";
-
 import { db } from "@/lib/repositories/db";
 import {
   Box,
@@ -75,10 +73,7 @@ export default function TabView() {
           >
             <Flex direction="column" height="full">
               <Container maxW="breakpoint-md" flex="1" padding="4">
-                <RichTextEditor
-                  dbName={note.databaseName}
-                  style={{ height: "100%" }}
-                />
+                <RichTextEditor dbName={note.databaseName} />
               </Container>
             </Flex>
           </Tabs.Content>

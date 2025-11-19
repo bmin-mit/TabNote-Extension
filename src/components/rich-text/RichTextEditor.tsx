@@ -1,22 +1,19 @@
-"use client";
-
-import { Prose } from "@/components/ui/prose";
+import { BlockNoteSchema } from "@blocknote/core";
 import { BlockNoteView } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
 import { useCreateBlockNote } from "@blocknote/react";
-import type { HTMLChakraProps } from "@chakra-ui/react";
 import type { Extension } from "@tiptap/core";
 import { IndexeddbPersistence } from "y-indexeddb";
 import * as Y from "yjs";
 import { toaster } from "../ui/toaster";
+import { codeBlockSpec } from "./config";
 
 export default function RichTextEditor({
   dbName,
-  ...props
 }: {
   dbName: string;
   extensions?: Extension[];
-} & HTMLChakraProps<"div">) {
+}) {
   var ydoc = new Y.Doc();
   var provider = new IndexeddbPersistence(dbName, ydoc);
 
@@ -30,6 +27,11 @@ export default function RichTextEditor({
       },
       showCursorLabels: "activity",
     },
+    schema: BlockNoteSchema.create().extend({
+      blockSpecs: {
+        codeBlock: codeBlockSpec,
+      },
+    }),
   });
 
   // BroadcastChannel for real-time sync across tabs
@@ -52,11 +54,6 @@ export default function RichTextEditor({
   }
 
   return (
-    <Prose {...props} className="menu">
-      <BlockNoteView
-        editor={editor}
-        style={{ width: "100%", height: "100%" }}
-      ></BlockNoteView>
-    </Prose>
+    <BlockNoteView editor={editor} style={{ width: "100%", height: "100%" }} />
   );
 }
