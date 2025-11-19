@@ -1,5 +1,5 @@
 {
-  "name": "react-base",
+  "name": "tabnote",
   "private": true,
   "version": "1.1.0",
   "type": "module",
@@ -8,9 +8,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "lint": "biome check",
-    "format": "biome format --write",
-    "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
+    "format": "biome format --write"
   },
   "dependencies": {
     "@blocknote/core": "^0.42.1",

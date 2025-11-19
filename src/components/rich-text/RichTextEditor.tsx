@@ -4,7 +4,7 @@ import "@blocknote/mantine/style.css";
 import { useCreateBlockNote } from "@blocknote/react";
 import type { Extension } from "@tiptap/core";
 import { IndexeddbPersistence } from "y-indexeddb";
-import * as Y from "yjs";
+import { applyUpdate, Doc } from "yjs";
 import { toaster } from "../ui/toaster";
 import { codeBlockSpec } from "./config";
 
@@ -14,7 +14,7 @@ export default function RichTextEditor({
   dbName: string;
   extensions?: Extension[];
 }) {
-  var ydoc = new Y.Doc();
+  var ydoc = new Doc();
   var provider = new IndexeddbPersistence(dbName, ydoc);
 
   const editor = useCreateBlockNote({
@@ -39,7 +39,7 @@ export default function RichTextEditor({
     if (typeof BroadcastChannel !== "undefined") {
       const channel = new BroadcastChannel(dbName);
       channel.onmessage = (event) => {
-        Y.applyUpdate(ydoc, new Uint8Array(event.data));
+        applyUpdate(ydoc, new Uint8Array(event.data));
       };
       ydoc.on("update", (update) => {
         channel.postMessage(update);
@@ -54,6 +54,10 @@ export default function RichTextEditor({
   }
 
   return (
-    <BlockNoteView editor={editor} style={{ width: "100%", height: "100%" }} />
+    <BlockNoteView
+      editor={editor}
+      style={{ width: "100%", height: "100%" }}
+      spellCheck={false}
+    />
   );
 }
