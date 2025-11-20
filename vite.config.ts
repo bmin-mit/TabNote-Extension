@@ -33,6 +33,7 @@ export default defineConfig({
   },
   // Optimize development server
   server: {
+    port: 3000,
     // Enable fast refresh
     hmr: true,
     // Use native file watching
