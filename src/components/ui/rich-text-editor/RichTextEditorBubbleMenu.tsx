@@ -138,9 +138,11 @@ function BlockStyleSelect() {
 
       if (!item.props) return true;
 
-      for (const key in item.props)
-        if (selectingNode.attrs[key] !== item.props[key]) return false;
-
+      for (const key in item.props) {
+        // Use k to convince TypeScript it's a key of item.props
+        const k = key as keyof typeof item.props;
+        if (selectingNode.attrs[key] !== item.props[k]) return false;
+      }
       return true;
     });
 
