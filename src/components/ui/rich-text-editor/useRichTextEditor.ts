@@ -9,6 +9,7 @@ const defaultOptions: UseEditorOptions = {
       link: {
         protocols: ["ftp", "mailto"],
       },
+      undoRedo: false,
     }),
     BubbleMenu,
     TextAlign.configure({
@@ -19,5 +20,9 @@ const defaultOptions: UseEditorOptions = {
 };
 
 export default function useRichTextEditor(options?: UseEditorOptions) {
-  return useEditor({ ...defaultOptions, ...options });
+  const extensions = options?.extensions
+    ? [...defaultOptions.extensions!, ...options.extensions]
+    : defaultOptions.extensions;
+
+  return useEditor({ ...defaultOptions, ...options, extensions });
 }
