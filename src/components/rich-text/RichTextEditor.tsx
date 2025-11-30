@@ -1,9 +1,15 @@
-import Plate from "../ui/plate";
+import RichTextEditor from "../ui/rich-text-editor";
 
-export default function RichTextEditor({ dbName }: { dbName: string }) {
+export default function RichText({ dbName }: { dbName: string }) {
   return (
-    <Plate.Root>
-      <Plate.Content spellCheck={false} />
-    </Plate.Root>
+    <RichTextEditor.Root>
+      <RichTextEditor.Content />
+      <RichTextEditor.BubbleMenu />
+    </RichTextEditor.Root>
   );
+  // return (
+  //   <Plate.Root>
+  //     <Plate.Content spellCheck={false} />
+  //   </Plate.Root>
+  // );``
 }
