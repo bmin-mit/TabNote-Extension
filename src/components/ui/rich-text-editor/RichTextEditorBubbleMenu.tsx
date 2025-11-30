@@ -6,6 +6,7 @@ import {
   Portal,
   Select,
 } from "@chakra-ui/react";
+import { useEditorState } from "@tiptap/react";
 import { BubbleMenu } from "@tiptap/react/menus";
 import {
   AlignCenter,
@@ -22,30 +23,41 @@ import {
   Pilcrow,
   Underline,
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import ToggleGroup from "../toggle-group";
 import useRichTextEditorContext from "./useRichTextEditorContext";
+import { useSelectionChange } from "./useSelectionChange";
 
 export default function RichTextEditorBubbleMenu() {
   const editor = useRichTextEditorContext();
 
+  const selection = useEditorState({
+    editor,
+    selector(state) {
+      return state.editor.state.selection;
+    },
+  });
+
   return (
     <BubbleMenu editor={editor}>
-      <Flex
-        colorPalette="gray"
-        gap="1"
-        p="1"
-        alignItems="center"
-        bg="bg.panel"
-        borderColor="border"
-        borderWidth="thin"
-        borderRadius="sm"
-        shadow="md"
-      >
-        <BlockStyleSelect />
-        <TextStyleToggleButtonGroup />
-        <AlignmentButtonGroup />
-        <CreateLinkButton />
-      </Flex>
+      {!selection.empty && (
+        <Flex
+          colorPalette="gray"
+          gap="1"
+          p="1"
+          alignItems="center"
+          bg="bg.panel"
+          borderColor="border"
+          borderWidth="thin"
+          borderRadius="sm"
+          shadow="md"
+        >
+          <BlockStyleSelect />
+          <TextStyleToggleButtonGroup />
+          <AlignmentButtonGroup />
+          <CreateLinkButton />
+        </Flex>
+      )}
     </BubbleMenu>
   );
 }
@@ -57,33 +69,30 @@ const blockStyleSelectItems = createListCollection({
       item: { value: "paragraph" },
       value: "paragraph",
       icon: Pilcrow,
-      selectValue: "Paragraph",
     },
     {
       label: "Heading 1",
       item: {
         value: "heading",
-        props: { level: 1, isTogglable: false },
+        props: { level: 1 },
       },
       value: "heading-1",
       icon: Heading1,
-      selectValue: "Heading 1",
     },
     {
       label: "Heading 2",
       item: {
         value: "heading",
-        props: { level: 2, isTogglable: false },
+        props: { level: 2 },
       },
       value: "heading-2",
       icon: Heading2,
-      selectValue: "Heading 2",
     },
     {
       label: "Heading 3",
       item: {
         value: "heading",
-        props: { level: 3, isTogglable: false },
+        props: { level: 3 },
       },
       value: "heading-3",
       icon: Heading3,
@@ -92,7 +101,7 @@ const blockStyleSelectItems = createListCollection({
       label: "Heading 4",
       item: {
         value: "heading",
-        props: { level: 4, isTogglable: false },
+        props: { level: 4 },
       },
       value: "heading-4",
       icon: Heading4,
@@ -101,11 +110,52 @@ const blockStyleSelectItems = createListCollection({
 });
 
 function BlockStyleSelect() {
+  const editor = useRichTextEditorContext();
+
+  const selection = useEditorState({
+    editor,
+    selector(state) {
+      return state.editor.state.selection;
+    },
+  });
+
+  const [selectValue, setSelectValue] = useState<string[]>([]);
+
+  useSelectionChange(editor, () => {
+    const $from = selection.$from;
+
+    const selectingNode =
+      $from.depth === 0 ? editor.state.doc.child(0) : $from.node();
+
+    const activeNode = blockStyleSelectItems.items.find(({ item }) => {
+      if (!selectingNode) return false;
+      if (selectingNode.type.name !== item.value) return false;
+
+      if (!item.props) return true;
+
+      for (const key in item.props)
+        if (selectingNode.attrs[key] !== item.props[key]) return false;
+
+      return true;
+    });
+
+    setSelectValue(activeNode ? [activeNode.value] : []);
+  });
+
+  const setBlockType = (
+    value: string,
+    name: string,
+    attrs?: Record<string, any>,
+  ) => {
+    setSelectValue([value]);
+    editor.chain().focus().setNode(name, attrs).run();
+  };
+
   return (
     <Select.Root
+      value={selectValue}
       collection={blockStyleSelectItems}
       size="xs"
-      defaultValue={[blockStyleSelectItems.items[0].value]}
       w="13ch"
     >
       <Select.Control>
@@ -121,8 +171,13 @@ function BlockStyleSelect() {
         <Select.Positioner>
           <Select.Content>
             <For each={blockStyleSelectItems.items}>
-              {({ label, value, icon: Icon }) => (
-                <Select.Item key={label} item={value} justifyContent="normal">
+              {({ label, value, icon: Icon, item }) => (
+                <Select.Item
+                  key={value}
+                  item={value}
+                  justifyContent="normal"
+                  onClick={() => setBlockType(value, item.value, item.props)}
+                >
                   <Icon />
                   {label}
                 </Select.Item>
@@ -136,16 +191,57 @@ function BlockStyleSelect() {
 }
 
 function TextStyleToggleButtonGroup() {
+  const editor = useRichTextEditorContext();
+  const [values, setValues] = useState<string[]>([]);
+
+  useEffect(() => {
+    const updateActiveStyles = () => {
+      const isBold = editor.isActive("bold");
+      const isItalic = editor.isActive("italic");
+      const isUnderline = editor.isActive("underline");
+
+      const newValues: string[] = [];
+      if (isBold) newValues.push("bold");
+      if (isItalic) newValues.push("italic");
+      if (isUnderline) newValues.push("underline");
+
+      setValues(newValues);
+    };
+
+    editor.on("selectionUpdate", updateActiveStyles);
+    editor.on("update", updateActiveStyles);
+
+    return () => {
+      editor.off("selectionUpdate", updateActiveStyles);
+      editor.off("update", updateActiveStyles);
+    };
+  }, [editor]);
+
   return (
-    <ToggleGroup.Root multiple>
+    <ToggleGroup.Root
+      multiple
+      value={values}
+      // onValueChange={(d) => updateTextStyle(d.value)}
+    >
       <ToggleGroup.Group size="xs">
-        <ToggleGroup.ItemIcon value="bold">
+        <ToggleGroup.ItemIcon
+          value="bold"
+          onClick={() => editor.chain().focus().toggleBold().run()}
+        >
           <Bold />
         </ToggleGroup.ItemIcon>
-        <ToggleGroup.ItemIcon value="italic">
+
+        <ToggleGroup.ItemIcon
+          value="italic"
+          onClick={() => editor.chain().focus().toggleItalic().run()}
+        >
           <Italic />
         </ToggleGroup.ItemIcon>
-        <ToggleGroup.ItemIcon value="underline">
+
+        <ToggleGroup.ItemIcon
+          value="underline"
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+        >
           <Underline />
         </ToggleGroup.ItemIcon>
       </ToggleGroup.Group>
@@ -155,7 +251,7 @@ function TextStyleToggleButtonGroup() {
 
 function AlignmentButtonGroup() {
   return (
-    <ToggleGroup.Root>
+    <ToggleGroup.Root deselectable={false}>
       <ToggleGroup.Group size="xs">
         <ToggleGroup.ItemIcon value="left">
           <AlignLeft />

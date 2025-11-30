@@ -38,6 +38,9 @@ export const Prose = chakra("div", {
       textDecorationColor: "border.muted",
       fontWeight: "500",
     },
+    [inWhere("& em")]: {
+      fontStyle: "italic",
+    },
     [inWhere("& strong")]: {
       fontWeight: "600",
     },
