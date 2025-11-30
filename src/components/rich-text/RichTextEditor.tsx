@@ -6,7 +6,7 @@ export default function RichText({ dbName }: { dbName: string }) {
     <RichTextEditor.Root
       options={{ extensions: [OfflineExtension.configure({ dbName })] }}
     >
-      <RichTextEditor.Content />
+      <RichTextEditor.Content h="full" />
       <RichTextEditor.BubbleMenu />
     </RichTextEditor.Root>
   );
