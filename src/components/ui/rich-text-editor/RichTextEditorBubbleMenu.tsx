@@ -1,8 +1,12 @@
 import {
+  Button,
   createListCollection,
+  Field,
   Flex,
   For,
   IconButton,
+  Input,
+  Popover,
   Portal,
   Select,
 } from "@chakra-ui/react";
@@ -24,6 +28,7 @@ import {
   Underline,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import ToggleGroup from "../toggle-group";
 import useRichTextEditorContext from "./useRichTextEditorContext";
 import { useSelectionChange } from "./useSelectionChange";
@@ -218,11 +223,7 @@ function TextStyleToggleButtonGroup() {
   }, [editor]);
 
   return (
-    <ToggleGroup.Root
-      multiple
-      value={values}
-      // onValueChange={(d) => updateTextStyle(d.value)}
-    >
+    <ToggleGroup.Root multiple value={values}>
       <ToggleGroup.Group size="xs">
         <ToggleGroup.ItemIcon
           value="bold"
@@ -250,19 +251,53 @@ function TextStyleToggleButtonGroup() {
 }
 
 function AlignmentButtonGroup() {
+  const [value, setValue] = useState<string[]>([]);
+  const editor = useRichTextEditorContext();
+
+  useSelectionChange(editor, () => {
+    if (editor.isActive({ textAlign: "left" })) {
+      setValue(["left"]);
+    } else if (editor.isActive({ textAlign: "center" })) {
+      setValue(["center"]);
+    } else if (editor.isActive({ textAlign: "right" })) {
+      setValue(["right"]);
+    } else if (editor.isActive({ textAlign: "justify" })) {
+      setValue(["justify"]);
+    } else {
+      setValue([]);
+    }
+  });
+
+  const setAlignment = (alignment: string) => {
+    setValue([alignment]);
+    editor.chain().focus().setTextAlign(alignment).run();
+  };
+
   return (
-    <ToggleGroup.Root deselectable={false}>
+    <ToggleGroup.Root deselectable={false} value={value}>
       <ToggleGroup.Group size="xs">
-        <ToggleGroup.ItemIcon value="left">
+        <ToggleGroup.ItemIcon value="left" onClick={() => setAlignment("left")}>
           <AlignLeft />
         </ToggleGroup.ItemIcon>
-        <ToggleGroup.ItemIcon value="center">
+
+        <ToggleGroup.ItemIcon
+          value="center"
+          onClick={() => setAlignment("center")}
+        >
           <AlignCenter />
         </ToggleGroup.ItemIcon>
-        <ToggleGroup.ItemIcon value="right">
+
+        <ToggleGroup.ItemIcon
+          value="right"
+          onClick={() => setAlignment("right")}
+        >
           <AlignRight />
         </ToggleGroup.ItemIcon>
-        <ToggleGroup.ItemIcon value="justify">
+
+        <ToggleGroup.ItemIcon
+          value="justify"
+          onClick={() => setAlignment("justify")}
+        >
           <AlignJustify />
         </ToggleGroup.ItemIcon>
       </ToggleGroup.Group>
@@ -270,10 +305,76 @@ function AlignmentButtonGroup() {
   );
 }
 
+type URLForm = {
+  url: string;
+};
+
 function CreateLinkButton() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<URLForm>();
+
+  const editor = useRichTextEditorContext();
+
+  const onSubmit = (data: URLForm) => {
+    editor
+      .chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: data.url })
+      .run();
+  };
+
+  const submitOnEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSubmit(onSubmit)();
+    }
+  };
+
   return (
-    <IconButton size="xs" variant="outline">
-      <Link />
-    </IconButton>
+    <Popover.Root size="xs">
+      <Popover.Trigger asChild>
+        <IconButton size="xs" variant="outline">
+          <Link />
+        </IconButton>
+      </Popover.Trigger>
+
+      <Portal>
+        <Popover.Positioner>
+          <Popover.Content>
+            <Popover.Arrow />
+            <Popover.Body
+              spaceY="2"
+              as="form"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <Field.Root invalid={!!errors.url}>
+                <Input
+                  size="xs"
+                  placeholder="Enter the URL"
+                  autoFocus
+                  {...register("url", {
+                    required: true,
+                    pattern:
+                      /^(https?:\/\/)([\w-]+(\.[\w-]+)+)(\/[\w-./?%&=]*)?$/i,
+                  })}
+                  onKeyUp={submitOnEnter}
+                />
+                <Field.ErrorText>
+                  Link must not be empty and must start with "http", "https",
+                  etc.
+                </Field.ErrorText>
+              </Field.Root>
+
+              <Button size="xs" w="full" variant="outline" type="submit">
+                Create Link
+              </Button>
+            </Popover.Body>
+          </Popover.Content>
+        </Popover.Positioner>
+      </Portal>
+    </Popover.Root>
   );
 }

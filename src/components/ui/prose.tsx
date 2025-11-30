@@ -35,7 +35,7 @@ export const Prose = chakra("div", {
       textDecoration: "underline",
       textUnderlineOffset: "3px",
       textDecorationThickness: "2px",
-      textDecorationColor: "border.muted",
+      textDecorationColor: "fg.subtle",
       fontWeight: "500",
     },
     [inWhere("& em")]: {
