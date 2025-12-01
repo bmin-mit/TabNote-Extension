@@ -1,7 +1,7 @@
+import BubbleMenu from "./RichTextEditorBubbleMenu";
+import Content from "./RichTextEditorContent";
 import Root from "./RichTextEditorRoot";
 import RootProvider from "./RichTextEditorRootProvider";
-import Content from "./RichTextEditorContent";
-import BubbleMenu from "./RichTextEditorBubbleMenu";
 
 export { default as useRichTextEditor } from "./useRichTextEditor";
 export { default as useRichTextEditorContext } from "./useRichTextEditorContext";

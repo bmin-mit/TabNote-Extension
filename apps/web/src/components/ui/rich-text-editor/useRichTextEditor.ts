@@ -1,14 +1,11 @@
 import BubbleMenu from "@tiptap/extension-bubble-menu";
+import TextAlign from "@tiptap/extension-text-align";
 import { type UseEditorOptions, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import TextAlign from "@tiptap/extension-text-align";
 
 const defaultOptions: UseEditorOptions = {
   extensions: [
     StarterKit.configure({
-      link: {
-        protocols: ["ftp", "mailto"],
-      },
       undoRedo: false,
     }),
     BubbleMenu,

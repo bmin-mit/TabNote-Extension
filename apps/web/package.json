@@ -1,0 +1,52 @@
+{
+  "name": "tabnote",
+  "private": true,
+  "version": "1.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "biome check",
+    "format": "biome format --write",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ark-ui/react": "^5.29.1",
+    "@chakra-ui/react": "^3.29.0",
+    "@emotion/react": "^11.14.0",
+    "@fontsource/inter": "^5.2.8",
+    "@tiptap/extension-bubble-menu": "^3.11.1",
+    "@tiptap/extension-collaboration": "^3.11.1",
+    "@tiptap/extension-text-align": "^3.11.1",
+    "@tiptap/pm": "^3.11.1",
+    "@tiptap/react": "^3.11.1",
+    "@tiptap/starter-kit": "^3.11.1",
+    "@tiptap/y-tiptap": "^3.0.1",
+    "dexie": "^4.2.1",
+    "dexie-react-hooks": "^4.2.0",
+    "lucide-react": "^0.553.0",
+    "next-themes": "^0.4.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-hook-form": "^7.67.0",
+    "react-icons": "^5.5.0",
+    "uuid": "^13.0.0",
+    "y-indexeddb": "^9.0.12",
+    "yjs": "^13.6.27"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.0",
+    "@tabnote/tsconfig": "workspace:*",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "shiki": "^3.15.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.3",
+    "vite": "^7.2.2",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}
