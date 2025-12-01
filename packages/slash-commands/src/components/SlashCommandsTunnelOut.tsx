@@ -1,11 +1,18 @@
+import type { Range } from "@tiptap/react";
 import { useContext, useEffect } from "react";
-import { TunnelContext } from "./contexts/TunnelContext";
 import { QueryInputContext } from "./contexts/QueryInputContext";
 import { RangeContext } from "./contexts/RangeContext";
+import { TunnelContext } from "./contexts/TunnelContext";
 
-export default function SlashCommandsTunnelOut() {
-  const [query, setQuery] = useContext(QueryInputContext);
-  const [range, setRange] = useContext(RangeContext);
+export default function SlashCommandsTunnelOut({
+  query,
+  range,
+}: {
+  query: string;
+  range: Range;
+}) {
+  const [, setQuery] = useContext(QueryInputContext);
+  const [, setRange] = useContext(RangeContext);
 
   useEffect(() => {
     setQuery(query);

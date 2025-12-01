@@ -5,7 +5,6 @@ import { EditorContext } from "./contexts/EditorContext";
 import { RangeContext } from "./contexts/RangeContext";
 
 export default function SlashCommandsItem({
-  ref,
   onCommand,
   children,
   ...props
@@ -18,11 +17,7 @@ export default function SlashCommandsItem({
   if (!range) return null;
 
   return (
-    <Command.Item
-      ref={ref}
-      {...props}
-      onSelect={() => onCommand?.({ editor, range })}
-    >
+    <Command.Item {...props} onSelect={() => onCommand?.({ editor, range })}>
       {children}
     </Command.Item>
   );
