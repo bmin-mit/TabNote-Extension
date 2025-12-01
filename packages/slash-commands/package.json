@@ -1,0 +1,11 @@
+{
+  "name": "@tabnote/slash-commands",
+  "version": "0.0.0",
+  "peerDependencies": {
+    "react": ">=19"
+  },
+  "devDependencies": {
+    "@tabnote/configs": "workspace:*",
+    "vite": "^7.2.2"
+  }
+}

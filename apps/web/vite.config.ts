@@ -1,19 +1,10 @@
-import react from "@vitejs/plugin-react";
-import path from "path";
+import path from "node:path";
+import baseConfig from "@tabnote/configs/vite.base.config";
 import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: [["babel-plugin-react-compiler"]],
-      },
-    }),
-    // tsconfigPaths(),
-  ],
-
-  base: "./",
+  ...baseConfig,
 
   resolve: {
     alias: {
