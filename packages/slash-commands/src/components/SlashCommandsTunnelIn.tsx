@@ -1,8 +1,11 @@
-import { useTunnelContext } from "./TunnelContext";
+import { TunnelContext } from "./contexts/TunnelContext";
 
 export default function SlashCommandsTunnelIn({
   children,
 }: React.PropsWithChildren) {
-  const tunnel = useTunnelContext();
-  return <tunnel.In>{children}</tunnel.In>;
+  return (
+    <TunnelContext.Consumer>
+      {(tunnel) => <tunnel.In>{children}</tunnel.In>}
+    </TunnelContext.Consumer>
+  );
 }
