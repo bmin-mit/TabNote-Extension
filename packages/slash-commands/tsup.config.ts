@@ -9,6 +9,12 @@ export default defineConfig((options: Options) => ({
   sourcemap: true,
   splitting: false,
   clean: true,
-  external: ["react", "react-dom", "@tiptap/pm", "@tiptap/react", "@tiptap/suggestion"],
+  external: [
+    "react",
+    "react-dom",
+    "@tiptap/pm",
+    "@tiptap/react",
+    "@tiptap/suggestion",
+  ],
   ...options,
 }));

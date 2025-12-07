@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/bmin-mit/TabNote-Extension"
   },
-  "homepage": "https://github.com/USERNAME/REPO#readme",
+  "homepage": "https://github.com/bmin-mit/TabNote-Extension/tree/main/packages/slash-commands",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
