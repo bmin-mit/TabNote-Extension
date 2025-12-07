@@ -1,12 +1,13 @@
 {
   "name": "@bmin-mit/tiptap-slash-commands",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bmin-mit/TabNote-Extension"
   },
   "homepage": "https://github.com/bmin-mit/TabNote-Extension/tree/main/packages/slash-commands",
+  "license": "MIT",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +16,10 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "lint": "biome check",
+    "format": "biome format --write",
+    "check-types": "tsc --noEmit"
   },
   "peerDependencies": {
     "react": ">=19",
