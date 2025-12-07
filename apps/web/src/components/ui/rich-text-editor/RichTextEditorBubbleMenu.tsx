@@ -52,10 +52,8 @@ export default function RichTextEditorBubbleMenu() {
           p="1"
           alignItems="center"
           bg="bg.panel"
-          borderColor="border"
-          borderWidth="thin"
           borderRadius="sm"
-          shadow="md"
+          boxShadow="lg"
         >
           <BlockStyleSelect />
           <TextStyleToggleButtonGroup />

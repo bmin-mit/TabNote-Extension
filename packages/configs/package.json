@@ -1,6 +1,7 @@
 {
   "name": "@tabnote/configs",
   "type": "module",
+  "version": "0.0.0",
   "devDependencies": {
     "@vitejs/plugin-react": "^5.1.0",
     "babel-plugin-react-compiler": "^1.0.0",

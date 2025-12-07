@@ -1,17 +1,15 @@
 import { Command } from "cmdk";
-import Commands from "./SlashCommandsCommands";
-import Item from "./SlashCommandsItem";
-import Root from "./SlashCommandsRoot";
+import { SlashCommandsCommands } from "./SlashCommandsCommands";
+import { SlashCommandsItem } from "./SlashCommandsItem";
+import { SlashCommandsRoot } from "./SlashCommandsRoot";
 
-const SlashCommands = {
-  Root,
-  Commands,
-  Item,
+export const SlashCommands = {
+  Root: SlashCommandsRoot,
+  Commands: SlashCommandsCommands,
+  Item: SlashCommandsItem,
   List: Command.List,
   Empty: Command.Empty,
   Loading: Command.Loading,
   Separator: Command.Separator,
   Group: Command.Group,
 };
-
-export default SlashCommands;

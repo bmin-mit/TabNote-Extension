@@ -4,13 +4,10 @@ import { QueryInputContext } from "./contexts/QueryInputContext";
 import { RangeContext } from "./contexts/RangeContext";
 import { TunnelContext } from "./contexts/TunnelContext";
 
-export default function SlashCommandsTunnelOut({
-  query,
-  range,
-}: {
+export const SlashCommandsTunnelOut: React.FC<{
   query: string;
   range: Range;
-}) {
+}> = ({ query, range }) => {
   const [, setQuery] = useContext(QueryInputContext);
   const [, setRange] = useContext(RangeContext);
 
@@ -29,7 +26,7 @@ export default function SlashCommandsTunnelOut({
         e.preventDefault();
         const commandRef = document.querySelector("#slash-commands");
 
-        if (commandRef)
+        if (commandRef) {
           commandRef.dispatchEvent(
             new KeyboardEvent("keydown", {
               key: e.key,
@@ -37,10 +34,12 @@ export default function SlashCommandsTunnelOut({
               bubbles: true,
             }),
           );
+        }
 
         return false;
       }
     };
+
     document.addEventListener("keydown", onKeyDown);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
@@ -52,4 +51,6 @@ export default function SlashCommandsTunnelOut({
       {(tunnel) => <tunnel.Out />}
     </TunnelContext.Consumer>
   );
-}
+};
+
+SlashCommandsTunnelOut.displayName = "SlashCommandsTunnelOut";

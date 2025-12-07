@@ -2,7 +2,7 @@ import { Extension } from "@tiptap/react";
 import Suggestion, { type SuggestionOptions } from "@tiptap/suggestion";
 import renderItems from "./render-items";
 
-const SlashCommandsExtension = Extension.create({
+export const SlashCommandsExtension = Extension.create({
   name: "slash-commands",
 
   addOptions() {
@@ -25,5 +25,3 @@ const SlashCommandsExtension = Extension.create({
     ];
   },
 });
-
-export default SlashCommandsExtension;

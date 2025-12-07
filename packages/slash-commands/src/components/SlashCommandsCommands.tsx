@@ -1,31 +1,25 @@
 import { Command } from "cmdk";
-import SlashCommandsTunnelIn from "./SlashCommandsTunnelIn";
-import { QueryInputContext } from "./contexts/QueryInputContext";
+import { SlashCommandsInput } from "./SlashCommandsInput.tsx";
+import { SlashCommandsTunnelIn } from "./SlashCommandsTunnelIn";
 
-export default function SlashCommandsCommands({
-  children,
-  ...props
-}: React.ComponentProps<typeof Command>) {
+export const SlashCommandsCommands: React.FC<
+  React.ComponentProps<typeof Command>
+> = ({ children, ref, ...props }) => {
   return (
     <SlashCommandsTunnelIn>
       <Command
         id="slash-commands"
+        ref={ref}
         onKeyDown={(e) => {
           e.stopPropagation();
         }}
         {...props}
       >
-        <QueryInputContext.Consumer>
-          {([query, setQuery]) => (
-            <Command.Input
-              value={query}
-              onValueChange={setQuery}
-              style={{ display: "none" }}
-            />
-          )}
-        </QueryInputContext.Consumer>
+        <SlashCommandsInput />
         {children}
       </Command>
     </SlashCommandsTunnelIn>
   );
-}
+};
+
+SlashCommandsCommands.displayName = "SlashCommandsCommands";

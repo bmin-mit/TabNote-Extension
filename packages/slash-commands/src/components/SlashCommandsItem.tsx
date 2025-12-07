@@ -4,13 +4,11 @@ import { useContext } from "react";
 import { EditorContext } from "./contexts/EditorContext";
 import { RangeContext } from "./contexts/RangeContext";
 
-export default function SlashCommandsItem({
-  onCommand,
-  children,
-  ...props
-}: Omit<React.ComponentProps<typeof Command.Item>, "onSelect"> & {
-  onCommand?: ({ editor, range }: { editor: Editor; range: Range }) => void;
-}) {
+export const SlashCommandsItem: React.FC<
+  Omit<React.ComponentProps<typeof Command.Item>, "onSelect"> & {
+    onCommand?: ({ editor, range }: { editor: Editor; range: Range }) => void;
+  }
+> = ({ onCommand, children, ...props }) => {
   const editor = useContext(EditorContext);
   const [range] = useContext(RangeContext);
 
@@ -21,4 +19,6 @@ export default function SlashCommandsItem({
       {children}
     </Command.Item>
   );
-}
+};
+
+SlashCommandsItem.displayName = "SlashCommandsItem";

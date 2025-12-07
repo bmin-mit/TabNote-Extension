@@ -1,7 +1,12 @@
+import {
+  enableKeyboardNavigation,
+  SlashCommandsExtension,
+} from "@bmin-mit/tiptap-slash-commands";
 import BubbleMenu from "@tiptap/extension-bubble-menu";
 import TextAlign from "@tiptap/extension-text-align";
 import { type UseEditorOptions, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import merge from "deepmerge";
 
 const defaultOptions: UseEditorOptions = {
   extensions: [
@@ -13,13 +18,32 @@ const defaultOptions: UseEditorOptions = {
       types: ["heading", "paragraph"],
       defaultAlignment: "left",
     }),
+    SlashCommandsExtension,
   ],
+  editorProps: {
+    handleDOMEvents: {
+      keydown: (_, v) => enableKeyboardNavigation(v),
+    },
+  },
 };
 
 export default function useRichTextEditor(options?: UseEditorOptions) {
-  const extensions = options?.extensions
-    ? [...defaultOptions.extensions!, ...options.extensions]
-    : defaultOptions.extensions;
+  const mergedEditorProps = merge(
+    defaultOptions.editorProps ?? {},
+    options?.editorProps ?? {},
+  );
 
-  return useEditor({ ...defaultOptions, ...options, extensions });
+  const mergedExtensions = [
+    ...(defaultOptions.extensions ?? []),
+    ...(options?.extensions ?? []),
+  ];
+
+  const mergedOptions = {
+    ...defaultOptions,
+    ...options,
+    extensions: mergedExtensions,
+    editorProps: mergedEditorProps,
+  };
+
+  return useEditor({ ...mergedOptions });
 }

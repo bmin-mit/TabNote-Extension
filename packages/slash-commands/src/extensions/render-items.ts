@@ -1,10 +1,10 @@
 import { ReactRenderer } from "@tiptap/react";
 import type { SuggestionOptions } from "@tiptap/suggestion";
 import tippy, { type Instance, type Props } from "tippy.js";
-import SlashCommandsTunnelOut from "../components/SlashCommandsTunnelOut";
+import { SlashCommandsTunnelOut } from "../components/SlashCommandsTunnelOut";
 
 const renderItems: SuggestionOptions["render"] = (
-  elementRef?: React.RefObject<Element> | null
+  elementRef?: React.RefObject<Element> | null,
 ) => {
   let component: ReactRenderer | null = null;
   let popup: Instance<Props>[] | null = null;

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ark-ui/react": "^5.29.1",
+    "@bmin-mit/tiptap-slash-commands": "workspace:*",
     "@chakra-ui/react": "^3.29.0",
     "@emotion/react": "^11.14.0",
     "@fontsource/inter": "^5.2.8",
@@ -23,6 +24,7 @@
     "@tiptap/react": "^3.11.1",
     "@tiptap/starter-kit": "^3.11.1",
     "@tiptap/y-tiptap": "^3.0.1",
+    "deepmerge": "^4.3.1",
     "dexie": "^4.2.1",
     "dexie-react-hooks": "^4.2.0",
     "lucide-react": "^0.553.0",
@@ -38,8 +40,9 @@
   "devDependencies": {
     "@tabnote/configs": "workspace:*",
     "@types/node": "^24.10.0",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "babel-plugin-react-compiler": "^1.0.0",
     "shiki": "^3.15.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.3",
