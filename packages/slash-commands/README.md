@@ -1,5 +1,7 @@
 # A Headless Slash Commands Menu for Tiptap in React 
 
+![img.png](images/img.png)
+
 A Tiptap headless UI extension for Reach that adds a slash command menu for your project. Inspired by
 [@harshtalks/slash-tiptap](https://www.npmjs.com/package/@harshtalks/slash-tiptap) and [Novel](https://novel.sh/)
 
