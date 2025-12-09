@@ -1,5 +1,6 @@
 import { SlashCommands } from "@bmin-mit/tiptap-slash-commands";
-import { Pilcrow } from "lucide-react";
+import { For } from "@chakra-ui/react";
+import { richTextCommands } from "@/components/rich-text/commands.ts";
 import RichTextEditor from "../ui/rich-text-editor";
 import OfflineExtension from "../ui/rich-text-editor/OfflineExtension";
 
@@ -12,18 +13,22 @@ export default function RichText({ dbName }: { dbName: string }) {
       <RichTextEditor.BubbleMenu />
       <RichTextEditor.Commands>
         <SlashCommands.List>
-          <RichTextEditor.CommandsItem
-            value="abc"
-            onCommand={({ editor }) => {
-              console.log(editor);
+          <For each={richTextCommands}>
+            {(command) => {
+              const Icon = command.icon;
+              return (
+                <RichTextEditor.CommandsItem
+                  key={command.value}
+                  value={command.value}
+                  keywords={command.searchTerms}
+                  onCommand={command.execute}
+                >
+                  <Icon />
+                  {command.label}
+                </RichTextEditor.CommandsItem>
+              );
             }}
-          >
-            <Pilcrow />
-            Paragraph
-          </RichTextEditor.CommandsItem>
-          <RichTextEditor.CommandsItem value="def">
-            def
-          </RichTextEditor.CommandsItem>
+          </For>
         </SlashCommands.List>
       </RichTextEditor.Commands>
     </RichTextEditor.Root>

@@ -2,7 +2,7 @@
 
 This monorepo contains multiple packages and apps related to the Tiptap ecosystem, including:
 
-- [**@bmin-mit/tiptap-slash-commands**](packages/tiptap-slash-commands) — A Tiptap headless UI extension for Reach that adds a slash command menu for your project. Inspired by
+- [**@bmin-mit/tiptap-slash-commands**](packages/slash-commands) — A Tiptap headless UI extension for Reach that adds a slash command menu for your project. Inspired by
   [@harshtalks/slash-tiptap](https://www.npmjs.com/package/@harshtalks/slash-tiptap) and [Novel](https://novel.sh/)
 - [**TabNote Extension**](apps/web) — Replace your new tab with a sleek and performative note-taking app.
 
@@ -11,7 +11,7 @@ This monorepo contains multiple packages and apps related to the Tiptap ecosyste
 ### **@bmin-mit/tiptap-slash-commands**
 A lightweight Tiptap extension that adds customizable Slash Commands.
 
-[Documentation](packages/tiptap-slash-commands) - 
+[Documentation](packages/slash-commands) - 
 [NPM](https://www.npmjs.com/package/@bmin-mit/tiptap-slash-commands)
 
 ---
