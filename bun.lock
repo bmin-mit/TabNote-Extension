@@ -52,6 +52,7 @@
     },
     "packages/configs": {
       "name": "@tabnote/configs",
+      "version": "0.0.0",
       "devDependencies": {
         "@vitejs/plugin-react": "^5.1.0",
         "babel-plugin-react-compiler": "^1.0.0",
@@ -60,7 +61,7 @@
     },
     "packages/slash-commands": {
       "name": "@bmin-mit/tiptap-slash-commands",
-      "version": "0.0.0",
+      "version": "1.0.3",
       "dependencies": {
         "cmdk": "^1.1.1",
         "tippy.js": "^6.3.7",

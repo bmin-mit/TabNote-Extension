@@ -1,5 +1,6 @@
 import BubbleMenu from "./RichTextEditorBubbleMenu";
 import Commands from "./RichTextEditorCommands.tsx";
+import CommandsEmpty from "./RichTextEditorCommandsEmpty.tsx";
 import CommandsItem from "./RichTextEditorCommandsItem.tsx";
 import Content from "./RichTextEditorContent";
 import Root from "./RichTextEditorRoot";
@@ -15,6 +16,7 @@ const RichTextEditor = {
   BubbleMenu,
   Commands,
   CommandsItem,
+  CommandsEmpty,
 };
 
 export default RichTextEditor;

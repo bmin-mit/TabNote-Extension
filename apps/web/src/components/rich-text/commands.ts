@@ -4,6 +4,8 @@ import {
   Heading2,
   Heading3,
   Heading4,
+  List,
+  ListOrdered,
   type LucideIcon,
   Pilcrow,
 } from "lucide-react";
@@ -85,6 +87,24 @@ export const richTextCommands: RichTextCommand[] = [
         .deleteRange(range)
         .setNode("heading", { level: 4 })
         .run();
+    },
+  },
+  {
+    value: "bullet-list",
+    label: "Bullet List",
+    searchTerms: ["unordered", "point", "ul"],
+    icon: List,
+    execute: ({ editor, range }) => {
+      editor.chain().focus().deleteRange(range).toggleBulletList().run();
+    },
+  },
+  {
+    value: "ordered-list",
+    label: "Numbered List",
+    icon: ListOrdered,
+    searchTerms: ["ol", "numbered"],
+    execute: ({ editor, range }) => {
+      editor.chain().focus().deleteRange(range).toggleOrderedList().run();
     },
   },
 ];
