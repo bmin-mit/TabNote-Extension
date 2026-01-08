@@ -1,17 +1,10 @@
-import { db } from "@/lib/repositories/db";
-import {
-  Box,
-  Container,
-  Flex,
-  For,
-  Tabs,
-  Text,
-  useTabs,
-} from "@chakra-ui/react";
+import { Box, Flex, For, Tabs, Text, useTabs } from "@chakra-ui/react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { useEffect } from "react";
+import NoteView from "@/components/note-view/NoteView.tsx";
+import UtilitiesGroup from "@/components/utilities-group/UtilitiesGroup.tsx";
+import { db } from "@/lib/repositories/db";
 import { CreateNoteDialog } from "../note-action-dialog";
-import { RichTextEditor } from "../rich-text";
 import TabMenu from "./TabMenu";
 
 export default function TabView() {
@@ -61,6 +54,8 @@ export default function TabView() {
           </For>
           <Tabs.Indicator />
         </Tabs.List>
+
+        <UtilitiesGroup />
       </Flex>
 
       <For each={notes}>
@@ -71,11 +66,7 @@ export default function TabView() {
             flex="1"
             overflow="auto"
           >
-            <Flex direction="column" height="full">
-              <Container maxW="breakpoint-md" flex="1" padding="4">
-                <RichTextEditor dbName={note.databaseName} />
-              </Container>
-            </Flex>
+            <NoteView noteName={note.databaseName} />
           </Tabs.Content>
         )}
       </For>

@@ -1,13 +1,7 @@
-import type { HTMLChakraProps } from "@chakra-ui/react";
+import quotes from "@/../public/qoutes.json";
 
-export function joinProps(
-  ...args: (HTMLChakraProps<any> | false | null | undefined)[]
-): HTMLChakraProps<any> {
-  let obj = {};
+const QUOTES_COUNT = quotes.length;
 
-  args.forEach((arg) => {
-    if (arg) obj = { ...obj, ...arg };
-  });
-
-  return obj;
+export function getRandomQuote() {
+  return quotes[Math.floor(Math.random() * QUOTES_COUNT)];
 }
