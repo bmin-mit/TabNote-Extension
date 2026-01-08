@@ -1,4 +1,4 @@
-import { Box, Container, Flex } from "@chakra-ui/react";
+import { Container, Flex } from "@chakra-ui/react";
 import { RichTextEditor } from "@/components/rich-text";
 import { Blockquote } from "@/components/ui/blockquote";
 import { useNoteVisibility } from "@/store/note-visibility.ts";
