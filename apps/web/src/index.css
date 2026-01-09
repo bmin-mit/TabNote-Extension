@@ -1,3 +1,8 @@
+body,
+html {
+  font-size: 100%;
+}
+
 .tiptap[contenteditable] {
   outline: none;
 }
