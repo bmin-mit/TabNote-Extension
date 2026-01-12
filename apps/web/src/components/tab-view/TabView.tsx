@@ -14,13 +14,13 @@ import QuoteView from "@/components/note-view/QuoteView.tsx";
 import { RichTextEditor } from "@/components/rich-text";
 import UtilitiesGroup from "@/components/utilities-group/UtilitiesGroup.tsx";
 import { db } from "@/lib/repositories/db";
-import { useNoteVisibility } from "@/store/note-visibility.ts";
+import { useNoteVisibilityContext } from "@/store/note-visibility.ts";
 import { CreateNoteDialog } from "../note-action-dialog";
 import TabMenu from "./TabMenu";
 
 export default function TabView() {
   const notes = useLiveQuery(() => db.notes.toArray());
-  const visibility = useNoteVisibility((store) => store.visibility);
+  const visibility = useNoteVisibilityContext((s) => s.visibility);
 
   const tabs = useTabs({
     orientation: "vertical",
@@ -30,7 +30,7 @@ export default function TabView() {
     if (tabs.value === null && notes?.length) {
       tabs.setValue(notes[0].databaseName);
     }
-  }, [notes, tabs, tabs.value]);
+  }, [notes, tabs.value, tabs.setValue]);
 
   return (
     <Tabs.RootProvider value={tabs} variant="enclosed" h="full" lazyMount>
