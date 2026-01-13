@@ -2,6 +2,7 @@ import Collaboration from "@tiptap/extension-collaboration";
 import { Extension } from "@tiptap/react";
 import { IndexeddbPersistence } from "y-indexeddb";
 import * as Y from "yjs";
+import { NoteContentMediator } from "@/lib/broadcast/note-content-mediator.ts";
 import { toaster } from "../toaster";
 
 const OfflineExtension = Extension.create({
@@ -14,13 +15,14 @@ const OfflineExtension = Extension.create({
 
     try {
       if (typeof BroadcastChannel !== "undefined") {
-        const channel = new BroadcastChannel(this.options.dbName);
+        const mediator = new NoteContentMediator(this.options.dbName);
 
-        channel.onmessage = (event) => {
+        mediator.onUpdate((event) => {
           Y.applyUpdate(ydoc, new Uint8Array(event.data));
-        };
+        });
+
         ydoc.on("update", (update) => {
-          channel.postMessage(update);
+          mediator.updateValue(update);
         });
       }
     } catch {
