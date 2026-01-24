@@ -1,11 +1,14 @@
-import { db } from "@/lib/repositories/db";
 import { Button, Dialog, Input, Portal, useDialog } from "@chakra-ui/react";
 import { Plus } from "lucide-react";
 import { useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
+import { db } from "@/lib/repositories/db";
 
 export default function CreateNoteDialog() {
   const dialog = useDialog();
   const [noteName, setNoteName] = useState("");
+
+  useHotkeys("alt+n", () => dialog.setOpen(true));
 
   const createNote = () => {
     dialog.setOpen(false);

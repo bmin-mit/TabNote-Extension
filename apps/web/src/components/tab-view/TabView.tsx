@@ -8,8 +8,11 @@ import {
   Text,
   useTabs,
 } from "@chakra-ui/react";
+import { useCallback } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import QuoteView from "@/components/note-view/QuoteView.tsx";
 import { RichTextEditor } from "@/components/rich-text";
+import { SettingsDialog } from "@/components/settings-dialog";
 import UtilitiesGroup from "@/components/utilities-group/UtilitiesGroup.tsx";
 import { useNoteSelectionContext } from "@/stores/note-selection.ts";
 import { useNoteVisibilityContext } from "@/stores/note-visibility.ts";
@@ -22,6 +25,24 @@ export default function TabView() {
   const notes = useNoteSelectionContext((s) => s.notes);
   const currentTab = useNoteSelectionContext((s) => s.selection);
   const setCurrentTab = useNoteSelectionContext((s) => s.setSelection);
+  const setCurrentTabByIdx = useNoteSelectionContext(
+    (s) => s.setSelectionByIdx,
+  );
+
+  const setCurrentTabToLastTab = useCallback(
+    () => setCurrentTabByIdx(Math.max(notes.length - 1, 0)),
+    [setCurrentTabByIdx, notes.length],
+  );
+
+  useHotkeys("alt+1", () => setCurrentTabByIdx(0));
+  useHotkeys("alt+2", () => setCurrentTabByIdx(1));
+  useHotkeys("alt+3", () => setCurrentTabByIdx(2));
+  useHotkeys("alt+4", () => setCurrentTabByIdx(3));
+  useHotkeys("alt+5", () => setCurrentTabByIdx(4));
+  useHotkeys("alt+6", () => setCurrentTabByIdx(5));
+  useHotkeys("alt+7", () => setCurrentTabByIdx(6));
+  useHotkeys("alt+8", () => setCurrentTabByIdx(7));
+  useHotkeys("alt+9", setCurrentTabToLastTab);
 
   const tabs = useTabs({
     value: currentTab,
@@ -33,11 +54,18 @@ export default function TabView() {
     <Tabs.RootProvider value={tabs} variant="enclosed" h="full" lazyMount>
       <Flex maxW="2xs" w="full" h="full" spaceY="2" direction="column">
         <Box bg="bg.muted" rounded="md">
-          <Flex align="center" justify="space-between">
-            <Text fontSize="lg" fontWeight="bold" p={4} color="colorPalette.fg">
+          <Flex align="center">
+            <Text
+              fontSize="lg"
+              fontWeight="bold"
+              p={4}
+              color="colorPalette.fg"
+              flex="1"
+            >
               TabNote
             </Text>
 
+            <SettingsDialog />
             <CreateNoteDialog />
           </Flex>
         </Box>

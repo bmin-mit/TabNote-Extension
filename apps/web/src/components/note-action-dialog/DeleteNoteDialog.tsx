@@ -1,6 +1,6 @@
-import { db } from "@/lib/repositories/db";
 import type { UseDialogReturn } from "@chakra-ui/react";
 import { Button, Dialog, Portal } from "@chakra-ui/react";
+import { db } from "@/lib/repositories/db";
 
 export default function DeleteNoteDialog({
   note,

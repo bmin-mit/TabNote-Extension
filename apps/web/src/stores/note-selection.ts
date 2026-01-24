@@ -15,6 +15,7 @@ export type NoteSelectionState = {
   init: () => Promise<void>;
 
   setSelection: (selection: string) => void;
+  setSelectionByIdx: (idx: number) => void;
   setSync: (sync: boolean) => void;
   toggleSync: () => void;
 };
@@ -66,6 +67,14 @@ export function createNoteSelectionStore() {
         setSelection: (selection: string) => {
           selectionMediator.updateValue(selection);
           set({ selection });
+        },
+
+        setSelectionByIdx: (idx: number) => {
+          if (idx < get().notes.length) {
+            const selection = get().notes[idx].databaseName;
+            selectionMediator.updateValue(selection);
+            set({ selection });
+          }
         },
 
         setSync: (sync: boolean) => {

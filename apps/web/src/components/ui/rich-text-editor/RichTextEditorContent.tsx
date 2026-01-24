@@ -1,6 +1,6 @@
 import { EditorContent } from "@tiptap/react";
-import { useRichTextEditorContext } from ".";
 import { Prose } from "../prose";
+import { useRichTextEditorContext } from ".";
 
 export default function RichTextEditorContent(
   props: Omit<React.ComponentProps<typeof Prose>, "children">,
