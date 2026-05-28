@@ -1,4 +1,5 @@
 # Monorepo: Tiptap Slash Commands + TabNote Extension
+![Wakapi Badge](https://wakapi.dev/api/badge/bm.mit/interval:any/project:tabnote)
 
 This monorepo contains multiple packages and apps related to the Tiptap ecosystem, including:
 
