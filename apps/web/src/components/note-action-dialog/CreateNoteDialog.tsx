@@ -1,9 +1,16 @@
-import { db } from "@/lib/repositories/db";
-import { Button, Dialog, Input, Portal, useDialog } from "@chakra-ui/react";
+import {
+  Button,
+  type ButtonProps,
+  Dialog,
+  Input,
+  Portal,
+  useDialog,
+} from "@chakra-ui/react";
 import { Plus } from "lucide-react";
 import { useState } from "react";
+import { db } from "@/lib/repositories/db";
 
-export default function CreateNoteDialog() {
+export default function CreateNoteDialog(props: ButtonProps) {
   const dialog = useDialog();
   const [noteName, setNoteName] = useState("");
 
@@ -28,7 +35,7 @@ export default function CreateNoteDialog() {
   return (
     <Dialog.RootProvider value={dialog} placement="center">
       <Dialog.Trigger asChild>
-        <Button variant="surface" size="xs" mr="4">
+        <Button variant="outline" size="xs" {...props}>
           <Plus />
         </Button>
       </Dialog.Trigger>
